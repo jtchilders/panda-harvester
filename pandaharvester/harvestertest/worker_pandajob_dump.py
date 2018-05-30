@@ -71,6 +71,9 @@ def main():
       sys.exit(-1)
 
 
+   logger.info('hours: %s workers: %s',options.hours,options.workers)
+
+
    conn = sqlite3.connect(options.database_filename)
 
    cursor = conn.cursor()
@@ -84,6 +87,8 @@ def main():
    cursor.execute(work_cmd)
 
    work_entries = cursor.fetchall()
+
+   logger.info('retrieved %s work entries',len(work_entries))
 
    for work_entry in work_entries:
       workerID,batchID,workerStatus = work_entry
